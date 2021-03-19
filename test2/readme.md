@@ -14,5 +14,47 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 
 ## 实验步骤
 
+1. 创建角色MiracleVin_view和用户MiracleVin,并对其进行授权和分配空间
+![创建角色和用户](1.png)
 
+2. 使用用户MiracleVin连接到pdborcl，创建表mytable和视图myview，插入数据，最后将myview的SELECT对象权限授予hr用户
+![创建表](2.png)
 
+3. 用户hr连接到pdborcl，查询MiracleVin授予它的视图myview
+![hr查看权限](3.png)
+
+>同学用户之间虽然使用同一个表空间，但是互相未开放权限所以无法进行只读共享和读写共享
+
+## 数据库和表空间占用分析
+
+> 当全班同学的实验都做完之后，数据库pdborcl中包含了每个同学的角色和用户。
+> 所有同学的用户都使用表空间users存储表的数据。
+> 表空间中存储了很多相同名称的表mytable和视图myview，但分别属性于不同的用户，不会引起混淆。
+> 随着用户往表中插入数据，表空间的磁盘使用量会增加。
+
+## 查看数据库的使用情况
+
+以下样例查看表空间的数据库文件，以及每个文件的磁盘占用情况。
+
+```sql
+$ sqlplus system/123@pdborcl
+
+SQL>SELECT tablespace_name,FILE_NAME,BYTES/1024/1024 MB,MAXBYTES/1024/1024 MAX_MB,autoextensible FROM dba_data_files  WHERE  tablespace_name='USERS';
+
+SQL>SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
+ free/1024/1024 "剩余MB",( total - free )/1024/1024 "使用MB",
+ Round(( total - free )/ total,4)* 100 "使用率%"
+ from (SELECT tablespace_name,Sum(bytes)free
+        FROM   dba_free_space group  BY tablespace_name)a,
+       (SELECT tablespace_name,Sum(bytes)total FROM dba_data_files
+        group  BY tablespace_name)b
+ where  a.tablespace_name = b.tablespace_name;
+```
+
+- autoextensible是显示表空间中的数据文件是否自动增加。
+- MAX_MB是指数据文件的最大容量。
+![数据库的使用情况](4.png)
+
+## 实验总结
+
+通过本次实验了解了什么是角色和用户，掌握了如何创建角色和用户，以及对其进行权限分配
