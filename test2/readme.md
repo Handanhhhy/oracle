@@ -27,17 +27,20 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 
 ### 只读共享
 
-1.将myview读权限授权给new_zgq,kyrenexf
+1.将mytable权限授权给new_zgq,kyrenexf
 ![授权Select](5(gtk).png)
 2.我读对kyrenexf myview的表进行查询
 ![查询](7sfk.png)
 
 ### 读写共享
 
-1.将myview读写权限授权给new_zgq,kyrenexf
+1.将mytable读写权限授权给new_zgq,kyrenexf
 ![授权Insert](6(itk).png)
-2.我读对kyrenexf myview的表进行读写和查询
-
+2.我读对new_zgq myview的表进行读写和查询
+>写
+![写](8(itz).png)
+>查询
+![写](9(sfz).png)
 
 ## 数据库和表空间占用分析
 
