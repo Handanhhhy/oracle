@@ -23,7 +23,21 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 3. 用户hr连接到pdborcl，查询MiracleVin授予它的视图myview
 ![hr查看权限](3.png)
 
->同学用户之间虽然使用同一个表空间，但是互相未开放权限所以无法进行只读共享和读写共享
+## 同学用户之间的表的共享
+
+### 只读共享
+
+1.将myview读权限授权给new_zgq,kyrenexf
+![授权Select](5(gtk).png)
+2.我读对kyrenexf myview的表进行查询
+![查询](7sfk.png)
+
+### 读写共享
+
+1.将myview读写权限授权给new_zgq,kyrenexf
+![授权Insert](6(itk).png)
+2.我读对kyrenexf myview的表进行读写和查询
+
 
 ## 数据库和表空间占用分析
 
