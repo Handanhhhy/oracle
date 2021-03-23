@@ -27,20 +27,49 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 
 ### 只读共享
 
-1.将mytable权限授权给new_zgq,kyrenexf
+1. 将mytable权限授权给new_zgq,kyrenexf
+
+```sql
+GRANT SELECT ON mytable TO new_zgq;
+GRANT SELECT ON mytable TO kyrenexf;
+```
+
 ![授权Select](5(gtk).png)
-2.我读对kyrenexf myview的表进行查询
+
+1. 我读对kyrenexf mytable的表进行查询
+
+```sql
+SELECT * FROM kyrenexf.mytable;
+```
+
 ![查询](7sfk.png)
 
 ### 读写共享
 
-1.将mytable读写权限授权给new_zgq,kyrenexf
+1. 将mytable读写权限授权给new_zgq,kyrenexf
+
+```sql
+GRANT INSERT ON mytable TO new_zgq;
+GRANT INSERT ON mytable TO kyrenexf;
+```
+
 ![授权Insert](6(itk).png)
-2.我读对new_zgq myview的表进行读写和查询
->写
+
+1. 我读对new_zgq myview的表进行读写和查询
+写：
+
+```sql
+INSERT INTO new_zgq.zgqtable(id,name)VALUES('2','Vin');
+```
+
 ![写](8(itz).png)
->查询
-![写](9(sfz).png)
+查询:
+
+```sql
+SELECT * FROM new_zgq.zgqtable;
+```
+
+![查询](9(sfz).png)
 
 ## 数据库和表空间占用分析
 
