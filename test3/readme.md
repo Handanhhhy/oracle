@@ -25,7 +25,7 @@ ALTER USER MiracleVin QUOTA UNLIMITED ON USERS02;
 ALTER USER MiracleVin QUOTA UNLIMITED ON USERS03;
 ```
 
-[授权](1.png)
+![授权](1.png)
 2. 创建订单表(orders)和与订单详表(order_details)
 
 ```sql
@@ -164,7 +164,7 @@ NOCOMPRESS NOPARALLEL
 PARTITION BY REFERENCE (order_details_fk1);
 ```
 
-[创建表](2.png)
+![创建表](2.png)
 3. 插入语句
 
 ```sql
@@ -234,7 +234,7 @@ begin
 end;
 ```
 
-[插入语句](3.png)
+![插入语句](3.png)
 4. 查询每个表的数据是否都大于1一万
 
 ```sql
@@ -242,8 +242,8 @@ select count(*) from orders;
 select count(*) from order_details;
 ```
 
-[查询](4.1.png)
-[查询](4.2.png)
+![查询](4.1.png)
+![查询](4.2.png)
 
 ## 执行计划分析
 
@@ -266,17 +266,17 @@ a.order_date between to_date('2017-1-1','yyyy-mm-dd') and to_date('2018-6-1','yy
 
 查询从2017-1-1到2018-6-1的所有订单记录
 执行结果
-[1执行结果](5.1.png)
+![1执行结果](5.1.png)
 执行计划
-[1执行计划](5.2.png)
+![1执行计划](5.2.png)
 分析:成本耗费值Cost=547,Row=1,consistent get=177,使用了一次全表扫描,filter过滤了一次
 
 ### 第二条语句
 
 执行结果
-[2执行结果](5.3.png)
+![2执行结果](5.3.png)
 执行计划
-[2执行计划](5.4.png)
+![2执行计划](5.4.png)
 分析:成本耗费值Cost=781,Row=1,consistent get=143226,使用了两次全表扫描,filter过滤了两次
 
 ## 查看数据库的使用情况
@@ -300,5 +300,5 @@ SQL>SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
 
 - autoextensible是显示表空间中的数据文件是否自动增加。
 - MAX_MB是指数据文件的最大容量。
-[数据库的使用情况](6.1.png)
-[数据库的使用情况](6.2.png)
+![数据库的使用情况](6.1.png)
+![数据库的使用情况](6.2.png)
