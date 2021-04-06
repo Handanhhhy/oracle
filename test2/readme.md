@@ -55,7 +55,7 @@ GRANT INSERT ON mytable TO kyrenexf;
 
 ![授权Insert](6(itk).png)
 
-1. 我读对new_zgq myview的表进行读写和查询
+1. 我读对new_zgq zgqtable的表进行读写和查询
 写：
 
 ```sql
