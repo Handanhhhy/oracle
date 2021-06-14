@@ -9,7 +9,6 @@
 ***\*SQL> alter tablespace MYTBS add datafile 'E:\MYTBS2.DBF' size 200m;\****
 
 ![img](test6-image/wps72.png) 
-
  
 
 ### （2）用户***\*配置\****文件的创建
